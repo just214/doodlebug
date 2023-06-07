@@ -10,6 +10,7 @@ const DEFAULT_VALUES = {
   description: "A fun drawing game for the whole family.",
   path: "/",
   image: "/icon-512.png",
+  appleTouchIcon: "/apple-touch-icon.png",
 };
 
 type Args = {
@@ -17,6 +18,7 @@ type Args = {
   description?: string;
   path?: `/${string}`;
   image?: string;
+  appleTouchIcon?: string;
 };
 
 export function createMetadata(args?: Args): Metadata {
@@ -24,6 +26,7 @@ export function createMetadata(args?: Args): Metadata {
   const description = args?.description || DEFAULT_VALUES.description;
   const path = args?.path || DEFAULT_VALUES.path;
   const image = args?.image || DEFAULT_VALUES.image;
+  const appleTouchIcon = args?.appleTouchIcon || DEFAULT_VALUES.appleTouchIcon;
 
   const url = `${baseUrl}${path}`;
   return {
@@ -51,7 +54,7 @@ export function createMetadata(args?: Args): Metadata {
     // Icons
     icons: {
       icon: "/favicon.ico",
-      apple: "/apple-touch-icon.png",
+      apple: appleTouchIcon,
     },
 
     // Manifest
