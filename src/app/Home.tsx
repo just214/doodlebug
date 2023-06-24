@@ -1,9 +1,8 @@
 "use client";
 
-import { shuffle } from "lodash";
-import Image from "next/image";
+import shuffle from "lodash/shuffle";
 import { IconType } from "react-icons";
-import { FaArrowRight } from "react-icons/fa";
+import { FaRandom } from "react-icons/fa";
 import { useIsClient } from "usehooks-ts";
 
 import { bgColors } from "utils/bgColors";
@@ -33,7 +32,7 @@ export const Home = (props: Props) => {
   const isClient = useIsClient();
   const [words, setWords] = useLocalStorage<Word[]>(
     "doodlebug-words",
-    shuffle(props.words)
+    props.words
   );
 
   const [selections, setSelections] = useLocalStorage<Selections>(
@@ -41,7 +40,7 @@ export const Home = (props: Props) => {
     defaultSelections
   );
 
-  function handleReset() {
+  function handleEndGame() {
     setSelections(defaultSelections);
     setWords(shuffle(props.words));
   }
@@ -87,11 +86,11 @@ export const Home = (props: Props) => {
         <Header />
 
         {word && action && (
-          <div className="w-full p-4 rounded-lg bg-black/20 mt-12">
+          <div className="w-full p-4 rounded-2xl bg-black/40 mt-12">
             {word && action && (
               <div key={word.id} className="text-center animate-fade w-full">
                 <p className="text-7xl font-display">{word.name}</p>
-                <p className="mt-6 inline-block rounded-full px-3 py-1 bg-black/30 text-yellow-100 text-xs font-sans font-medium ">
+                <p className="mt-6 inline-block rounded-full px-3 py-1 bg-black/50 text-yellow-100 text-base font-sans font-medium ">
                   {word.category}
                 </p>
                 <div className="flex items-center text-xl justify-center gap-4 mt-6">
@@ -118,20 +117,20 @@ export const Home = (props: Props) => {
 
         {selections?.actionIndex !== null && (
           <button
-            className="inline-block mt-6 p-2 text-lg rounded-lg hover:bg-black/30 transition-all duration-300 ease-in-out active:scale-95"
-            onClick={handleReset}
+            className="inline-block absolute bottom-5 mt-6 p-2 text-lg rounded-lg hover:bg-black/30 transition-all duration-300 ease-in-out active:scale-95"
+            onClick={handleEndGame}
           >
             End Game
           </button>
         )}
 
         <button
-          className=" fixed right-10 bottom-10 text-5xl font-display flex items-center gap-2 justify-center  my-6 active:scale-95 bg-yellow-200  p-4 rounded-full transition-all duration-200 ease-in-out"
+          className=" fixed right-10 bottom-10 text-4xl font-display flex items-center gap-2 justify-center  my-6 active:scale-95 bg-yellow-200  p-4 rounded-full transition-all duration-200 ease-in-out"
           onClick={handleSelection}
           aria-label="Next Word"
           style={{ color: bgColor }}
         >
-          <FaArrowRight />
+          <FaRandom />
         </button>
       </div>
     </main>

@@ -5,7 +5,7 @@ import { BiEraser, BiPencil, BiRedo, BiUndo } from "react-icons/bi";
 import { MdClose } from "react-icons/md";
 import { ReactSketchCanvas, ReactSketchCanvasRef } from "react-sketch-canvas";
 
-import { Header } from "./Header";
+import { Header } from "../Header";
 
 const styles = {
   border: "none",
